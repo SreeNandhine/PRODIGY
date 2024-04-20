@@ -1,0 +1,26 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+df = pd.read_csv('https://raw.githubusercontent.com/softhints/Pandas-Exercises-Projects/main/data/food_recipes.csv', low_memory=False)
+df.sample(2)
+df.shape
+df.columns
+df.info()
+df.dtypes
+df.describe()
+df.describe(include='object')
+df.diet.nunique()
+df.diet.unique()
+df.diet.value_counts(dropna=False)
+df['cook_time'] = df['cook_time'].str.replace(' M', '').fillna(0).astype(int)
+df['prep_time'] = df['prep_time'].str.replace(' M', '').fillna(0).astype(int)
+df['ingredients'].str.split('|', expand=True)
+df['ingredients'].str.split('|', expand=True).melt()['value'].value_counts()
+sns.heatmap(df.isna(),cmap = 'Greens')
+sns.heatmap(df.tail(3000).isna(),cmap = 'Greens')
+sns.heatmap(df.corr(),cmap='Greens',annot=False)
+sns.heatmap(df[df.diet=='Vegan'].corr(),cmap='Greens',annot=True)
+cols = ['vote_count', 'rating',  'prep_time', 'cook_time']
+plt.figure(figsize=(20, 5))
+sns.boxplot(data=df[cols], orient='h')
+df[['prep_time', 'cook_time']].head(18).describe()
