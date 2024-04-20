@@ -1,0 +1,46 @@
+import pandas as pd
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
+
+# Sample data (replace this with your actual data)
+data = pd.DataFrame({
+    'text': ['I love this product!', 'This product is terrible...', 'Neutral opinion here.']
+})
+
+# Initialize SentimentIntensityAnalyzer
+sid = SentimentIntensityAnalyzer()
+
+# Perform sentiment analysis
+data['sentiment'] = data['text'].apply(lambda x: sid.polarity_scores(x)['compound'])
+
+# Visualize sentiment distribution
+plt.figure(figsize=(10, 6))
+data['sentiment'].plot(kind='hist', bins=30, color='skyblue', edgecolor='black')
+plt.title('Sentiment Distribution')
+plt.xlabel('Sentiment Score')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+
+# Create word cloud for positive sentiment
+positive_texts = ' '.join(data[data['sentiment'] > 0]['text'])
+positive_wordcloud = WordCloud(width=800, height=400, background_color='white').generate(positive_texts)
+
+# Display the word cloud for positive sentiment
+plt.figure(figsize=(10, 6))
+plt.imshow(positive_wordcloud, interpolation='bilinear')
+plt.title('Word Cloud for Positive Sentiment')
+plt.axis('off')
+plt.show()
+
+# Create word cloud for negative sentiment
+negative_texts = ' '.join(data[data['sentiment'] < 0]['text'])
+negative_wordcloud = WordCloud(width=800, height=400, background_color='black', colormap='Reds').generate(negative_texts)
+
+# Display the word cloud for negative sentiment
+plt.figure(figsize=(10, 6))
+plt.imshow(negative_wordcloud, interpolation='bilinear')
+plt.title('Word Cloud for Negative Sentiment')
+plt.axis('off')
+plt.show()
