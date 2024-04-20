@@ -1,0 +1,53 @@
+#import dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+data = {
+    'Accident_ID': ['1','2','3'],
+    'Road_surface_type':['Wet','Dry','Wet'],
+    'Light_conditions':['Daylight','Night','Daylight'],
+    'Weather_conditions':['Clear','Rain','Clear'],
+    'Accident_severity':['Minor','Major','Minor'],
+    'Causes_of_accident':['Speeding','Distracted driving','Drunk driving']}
+# Visualize accident distribution by road conditions
+plt.figure(figsize=(12, 6))
+sns.countplot(x='Road_surface_type', data=data)
+plt.xticks(rotation=45)
+plt.xlabel('Road Surface Type')
+plt.ylabel('Number of Accidents')
+plt.title('Accidents by Road Surface Type')
+plt.show()
+# Calculate correlations
+# Note: Correlations are more suitable for numerical data, so we'll skip this for categorical fields.
+# Visualize accident distribution by light conditions
+plt.figure(figsize=(12, 6))
+sns.countplot(x='Light_conditions', data=data)
+plt.xticks(rotation=45)
+plt.xlabel('Light Conditions')
+plt.ylabel('Number of Accidents')
+plt.title('Accidents by Light Conditions')
+plt.show()
+# Visualize accident distribution by weather conditions
+plt.figure(figsize=(12, 6))
+sns.countplot(x='Weather_conditions', data=data)
+plt.xticks(rotation=45)
+plt.xlabel('Weather Conditions')
+plt.ylabel('Number of Accidents')
+plt.title('Accidents by Weather Conditions')
+plt.show()
+# Visualize accident distribution by accident severity
+plt.figure(figsize=(12, 6))
+sns.countplot(x='Accident_severity', data=data)
+plt.xticks(rotation=45)
+plt.xlabel('Accident Severity')
+plt.ylabel('Number of Accidents')
+plt.title('Accidents by Accident Severity')
+plt.show()
+#contributing factors analysis
+plt.figure(figsize=(12, 6))
+sns.countplot(x='Cause_of_accident', data=data)
+plt.xticks(rotation=90)
+plt.xlabel('Cause of Accident')
+plt.ylabel('Number of Accidents')
+plt.title('Accidents by Contributing Factors')
+plt.show()
